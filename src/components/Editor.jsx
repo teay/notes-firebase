@@ -103,9 +103,7 @@ export default function Editor({ note, onUpdate }) {
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-4">
-        <div className="max-w-2xl mx-auto">
-          <EditorContent editor={editor} className="prose prose-slate max-w-none" />
-        </div>
+        <EditorContent editor={editor} className="prose prose-slate max-w-none" />
       </div>
     </div>
   );
