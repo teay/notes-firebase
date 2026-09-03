@@ -28,36 +28,84 @@ export default function Editor({ note, onUpdate }) {
   if (!editor) return null;
 
   return (
-    <div className="h-full flex flex-col p-6 bg-white">
-      <div className="flex gap-2 mb-4 pb-3 border-b border-slate-200">
+    <div className="h-full flex flex-col bg-white">
+      <div className="flex items-center gap-1 px-4 py-2 border-b border-slate-100 bg-slate-50/50">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`px-3 py-1 rounded text-sm font-semibold ${
-            editor.isActive('bold') ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'
+          className={`p-2 rounded-lg text-sm font-semibold transition-all ${
+            editor.isActive('bold') 
+              ? 'bg-slate-800 text-white shadow-sm' 
+              : 'text-slate-500 hover:bg-slate-200/70'
           }`}
         >
-          Bold
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 4h8a4 4 0 014 4 4 4 0 01-4 4H6z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 12h9a4 4 0 014 4 4 4 0 01-4 4H6z" />
+          </svg>
         </button>
         <button
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`px-3 py-1 rounded text-sm italic ${
-            editor.isActive('italic') ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'
+          className={`p-2 rounded-lg text-sm transition-all ${
+            editor.isActive('italic') 
+              ? 'bg-slate-800 text-white shadow-sm' 
+              : 'text-slate-500 hover:bg-slate-200/70'
           }`}
         >
-          Italic
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 4h4m-2 0l-4 16m-2 0h4" />
+          </svg>
         </button>
         <button
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={`px-3 py-1 rounded text-sm font-bold ${
-            editor.isActive('heading', { level: 1 }) ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'
+          className={`p-2 rounded-lg text-xs font-bold transition-all ${
+            editor.isActive('heading', { level: 1 }) 
+              ? 'bg-slate-800 text-white shadow-sm' 
+              : 'text-slate-500 hover:bg-slate-200/70'
           }`}
         >
           H1
         </button>
+        <button
+          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+          className={`p-2 rounded-lg text-xs font-bold transition-all ${
+            editor.isActive('heading', { level: 2 }) 
+              ? 'bg-slate-800 text-white shadow-sm' 
+              : 'text-slate-500 hover:bg-slate-200/70'
+          }`}
+        >
+          H2
+        </button>
+        <div className="w-px h-5 bg-slate-200 mx-1"></div>
+        <button
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={`p-2 rounded-lg transition-all ${
+            editor.isActive('bulletList') 
+              ? 'bg-slate-800 text-white shadow-sm' 
+              : 'text-slate-500 hover:bg-slate-200/70'
+          }`}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          className={`p-2 rounded-lg transition-all ${
+            editor.isActive('blockquote') 
+              ? 'bg-slate-800 text-white shadow-sm' 
+              : 'text-slate-500 hover:bg-slate-200/70'
+          }`}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+        </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto prose max-w-none focus:outline-none">
-        <EditorContent editor={editor} />
+      <div className="flex-1 overflow-y-auto px-6 py-4">
+        <div className="max-w-2xl mx-auto">
+          <EditorContent editor={editor} className="prose prose-slate max-w-none" />
+        </div>
       </div>
     </div>
   );

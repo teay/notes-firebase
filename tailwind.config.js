@@ -11,7 +11,13 @@ export default {
         iosBg: '#F2F2F7',
         iosCard: '#FFFFFF',
         iosSidebar: '#F6F6F6',
-      }
+      },
+      fontFamily: {
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      },
+      borderWidth: {
+        '3': '3px',
+      },
     },
   },
   plugins: [],
