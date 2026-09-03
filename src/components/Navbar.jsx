@@ -1,13 +1,13 @@
 import React from 'react';
-import { SquarePen, Trash2, LogIn, LogOut, PanelLeft } from 'lucide-react';
+import { SquarePen, Trash2, LogIn, LogOut, PanelLeft, Sun, Moon } from 'lucide-react';
 
-export default function Navbar({ user, onLogin, onLogout, onNewNote, onDeleteNote, activeNoteId, toggleSidebar }) {
+export default function Navbar({ user, onLogin, onLogout, onNewNote, onDeleteNote, activeNoteId, toggleSidebar, darkMode, setDarkMode }) {
   return (
-    <div className="h-14 bg-white/70 backdrop-blur-xl border-b border-slate-200/80 flex items-center justify-between px-4 sticky top-0 z-50">
+    <div className="h-14 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between px-4 sticky top-0 z-50">
       <div className="flex items-center gap-2">
         <button 
           onClick={toggleSidebar} 
-          className="p-2 text-slate-600 hover:bg-slate-100 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
+          className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
         >
           <PanelLeft size={20} />
         </button>
@@ -17,7 +17,7 @@ export default function Navbar({ user, onLogin, onLogout, onNewNote, onDeleteNot
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
           </div>
-          <span className="text-sm font-semibold text-slate-700">Notes</span>
+          <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">Notes</span>
         </div>
       </div>
 
@@ -27,29 +27,35 @@ export default function Navbar({ user, onLogin, onLogout, onNewNote, onDeleteNot
             {activeNoteId && (
               <button 
                 onClick={onDeleteNote} 
-                className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
+                className="p-2 text-slate-400 dark:text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
               >
                 <Trash2 size={18} />
               </button>
             )}
             <button 
               onClick={onNewNote} 
-              className="p-2 text-slate-600 hover:bg-slate-100 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
+              className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
             >
               <SquarePen size={18} />
             </button>
-            <div className="w-px h-5 bg-slate-200 mx-1"></div>
+            <button 
+              onClick={() => setDarkMode(!darkMode)} 
+              className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all duration-150 hover:scale-105 active:scale-95"
+            >
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1"></div>
             <div className="flex items-center gap-2">
               {user.photoURL && (
                 <img 
                   src={user.photoURL} 
                   alt="" 
-                  className="w-7 h-7 rounded-full ring-2 ring-slate-200"
+                  className="w-7 h-7 rounded-full ring-2 ring-slate-200 dark:ring-slate-700"
                 />
               )}
               <button 
                 onClick={onLogout} 
-                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-all duration-150"
+                className="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all duration-150"
               >
                 <LogOut size={18} />
               </button>
