@@ -177,7 +177,10 @@ export default function App() {
         <Sidebar 
           notes={notes} 
           activeNoteId={activeNoteId} 
-          onSelectNote={setActiveNoteId} 
+          onSelectNote={(id) => {
+            setActiveNoteId(id);
+            if (window.innerWidth < 768) setSidebarOpen(false);
+          }} 
           isOpen={sidebarOpen}
         />
         <main className="flex-1 h-[calc(100vh-3.5rem)] overflow-y-auto bg-slate-50/50 dark:bg-slate-800/50">
