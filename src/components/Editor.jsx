@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
+const MAX_CONTENT_LENGTH = 100000;
+
 export default function Editor({ note, onUpdate }) {
+  const [charCount, setCharCount] = useState(0);
+  const remaining = MAX_CONTENT_LENGTH - charCount;
+
   const editor = useEditor({
     extensions: [StarterKit],
     content: note?.content || '',
@@ -10,6 +15,7 @@ export default function Editor({ note, onUpdate }) {
       const html = editor.getHTML();
       const text = editor.getText();
       const firstLine = text.split('\n')[0]?.trim() || 'Untitled Note';
+      setCharCount(text.length);
       
       if (onUpdate) {
         onUpdate(html, firstLine);
@@ -21,6 +27,7 @@ export default function Editor({ note, onUpdate }) {
     if (editor && note) {
       if (editor.getHTML() !== note.content) {
         editor.commands.setContent(note.content || '');
+        setCharCount(editor.getText().length);
       }
     }
   }, [note?.id, editor]);
@@ -104,6 +111,14 @@ export default function Editor({ note, onUpdate }) {
 
       <div className="flex-1 overflow-y-auto px-6 py-4">
         <EditorContent editor={editor} className="prose prose-slate dark:prose-invert max-w-none" />
+      </div>
+
+      <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50">
+        <div className="flex items-center justify-end">
+          <span className={`text-xs ${remaining < 10000 ? 'text-amber-500' : remaining < 1000 ? 'text-red-500' : 'text-slate-400 dark:text-slate-500'}`}>
+            {remaining.toLocaleString()} characters remaining
+          </span>
+        </div>
       </div>
     </div>
   );

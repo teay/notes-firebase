@@ -20,16 +20,8 @@ function getTitle(content) {
   return title && title.length > 0 ? title.substring(0, 40) : 'Untitled';
 }
 
-function formatBytes(bytes) {
-  if (bytes === 0) return '0 B';
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-}
-
 export default function Sidebar({ notes, activeNoteId, onSelectNote, isOpen }) {
   const [search, setSearch] = useState('');
-  const totalSize = notes.reduce((acc, note) => acc + (note.content?.length || 0), 0);
 
   const filteredNotes = useMemo(() => {
     if (!search.trim()) return notes;
@@ -49,7 +41,7 @@ export default function Sidebar({ notes, activeNoteId, onSelectNote, isOpen }) {
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-lg font-bold px-1 text-slate-800 dark:text-slate-100 tracking-tight">My Notes</h1>
           <span className="text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">
-            {filteredNotes.length} · {formatBytes(totalSize)}
+            {filteredNotes.length}
           </span>
         </div>
         <div className="relative">
