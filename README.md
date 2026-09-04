@@ -1,4 +1,4 @@
-# 📝 Notes Firebase
+# Notes Firebase
 
 A minimal Apple Notes-style web app with real-time cloud sync, built as a PWA.
 
@@ -8,6 +8,10 @@ A minimal Apple Notes-style web app with real-time cloud sync, built as a PWA.
 - Rich text editing (TipTap)
 - PWA support (Add to Home Screen)
 - Google Authentication
+- Dark mode toggle
+- Mobile responsive (iPhone XR and similar)
+- Character remaining counter (100,000 limit)
+- Input validation via Firestore rules
 
 ## Tech Stack
 
@@ -39,8 +43,13 @@ npm run dev
 ```
 notes/{noteId}
   ├── userId: string
-  ├── title: string
-  ├── content: string (HTML)
+  ├── title: string (max 500 chars)
+  ├── content: string (max 100,000 chars)
   ├── createdAt: Timestamp
   └── updatedAt: Timestamp
 ```
+
+## Security
+
+- Firestore rules enforce auth + ownership
+- Input validation on title (500 chars) and content (100,000 chars)
