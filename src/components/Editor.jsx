@@ -11,6 +11,9 @@ export default function Editor({ note, onUpdate }) {
   const editor = useEditor({
     extensions: [StarterKit],
     content: note?.content || '',
+    onCreate: ({ editor }) => {
+      setCharCount(editor.getText().length);
+    },
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       const text = editor.getText();
