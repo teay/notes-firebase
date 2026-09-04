@@ -180,7 +180,7 @@ export default function App() {
           onSelectNote={setActiveNoteId} 
           isOpen={sidebarOpen}
         />
-        <main className="flex-1 h-full overflow-y-auto bg-slate-50/50 dark:bg-slate-800/50">
+        <main className="flex-1 h-[calc(100vh-3.5rem)] overflow-y-auto bg-slate-50/50 dark:bg-slate-800/50">
           {activeNote ? (
             <Editor 
               key={activeNote.id} 

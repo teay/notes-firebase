@@ -36,7 +36,7 @@ export default function Sidebar({ notes, activeNoteId, onSelectNote, isOpen }) {
   if (!isOpen) return null;
 
   return (
-    <div className="w-full md:w-80 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-r border-slate-200/80 dark:border-slate-700/80 flex flex-col h-[calc(100vh-3.5rem)]">
+    <div className="w-64 md:w-80 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-r border-slate-200/80 dark:border-slate-700/80 flex flex-col h-[calc(100vh-3.5rem)]">
       <div className="p-4 border-b border-slate-100 dark:border-slate-700/50">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-lg font-bold px-1 text-slate-800 dark:text-slate-100 tracking-tight">My Notes</h1>
